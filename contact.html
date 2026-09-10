@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact us — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="contact">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+  ============================================================= -->
+  <section class="page-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Contact</span>
+      </p>
+      <h1>Talk to us</h1>
+      <p class="page-sub page-sub-wide">
+        Questions about a course, a payment or joining as a trainer — send a
+        message and someone will reply within one working day.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONTACT FORM + DETAILS
+  ============================================================= -->
+  <main class="section">
+    <div class="container contact-layout">
+
+      <!-- ---------- LEFT: THE FORM ---------- -->
+      <div class="contact-main">
+        <div class="form-card">
+          <h2 class="form-card-title">Send a message</h2>
+
+          <div class="alert" id="formAlert" hidden></div>
+
+          <form id="contactForm" novalidate>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="fullName">Your name</label>
+                <input type="text" id="fullName" class="form-input" placeholder="Arpan Akarapu" />
+                <p class="form-error" id="fullNameError"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email address</label>
+                <input type="email" id="email" class="form-input" placeholder="you@example.com" />
+                <p class="form-error" id="emailError"></p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone number</label>
+                <input type="tel" id="phone" class="form-input" placeholder="Optional" />
+                <p class="form-error" id="phoneError"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="topic">What is this about?</label>
+                <select id="topic" class="form-select form-select-block">
+                  <option value="">Choose a topic</option>
+                  <option>Course enquiry</option>
+                  <option>Payment or refund</option>
+                  <option>Technical problem</option>
+                  <option>Becoming a trainer</option>
+                  <option>Corporate training</option>
+                  <option>Something else</option>
+                </select>
+                <p class="form-error" id="topicError"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input type="text" id="subject" class="form-input"
+                     placeholder="One line summary" />
+              <p class="form-error" id="subjectError"></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea id="message" class="form-input form-textarea" rows="6"
+                        placeholder="Tell us what you need help with."></textarea>
+              <p class="form-hint muted small">
+                <span id="messageCount">0</span> / 600 characters
+              </p>
+              <p class="form-error" id="messageError"></p>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-row">
+                <input type="checkbox" id="copyMe" />
+                <span>Send a copy of this message to my email</span>
+              </label>
+            </div>
+
+            <div class="form-actions form-actions-left">
+              <button type="submit" class="btn btn-primary">Send message</button>
+              <button type="button" class="btn btn-outline" id="resetContactBtn">Clear form</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+
+      <!-- ---------- RIGHT: HOW ELSE TO REACH US ---------- -->
+      <aside class="contact-side">
+
+        <div class="contact-card">
+          <h3 class="side-title">Reach us directly</h3>
+
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-label">Email</span>
+              <a href="mailto:hello@skillnova.example">hello@skillnova.example</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Phone</span>
+              <a href="tel:+914012345678">+91 40 1234 5678</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Support hours</span>
+              <span>Mon to Sat, 10 AM to 7 PM IST</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-label">Office</span>
+              <address class="contact-address">
+                Second floor, Vaishnavi Building<br />
+                Gachibowli, Hyderabad 500032<br />
+                Telangana, India
+              </address>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-card">
+          <h3 class="side-title">Response times</h3>
+          <dl class="fact-list">
+            <div class="fact-row">
+              <dt>Course enquiries</dt>
+              <dd>Same day</dd>
+            </div>
+            <div class="fact-row">
+              <dt>Payment issues</dt>
+              <dd>Within 4 hours</dd>
+            </div>
+            <div class="fact-row">
+              <dt>Trainer applications</dt>
+              <dd>3 to 5 days</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- The map is an iframe from Google Maps, no API key needed -->
+        <div class="map-embed">
+          <iframe
+            title="Our office location in Gachibowli, Hyderabad"
+            src="https://maps.google.com/maps?q=Gachibowli,Hyderabad&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </aside>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FAQ
+  ============================================================= -->
+  <section class="section section-alt">
+    <div class="container faq-container">
+      <h2 class="section-title">Common questions</h2>
+
+      <!-- Each question opens and closes on click, handled in JS -->
+      <div class="accordion" id="faqAccordion">
+
+        <div class="accordion-item">
+          <button type="button" class="accordion-head" data-accordion>
+            <span>Can I get a refund after buying a course?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              Yes, within seven days of purchase, as long as you haven't
+              downloaded the full course notes. Write to us with your order ID
+              and the amount goes back to the source account in five working days.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button type="button" class="accordion-head" data-accordion>
+            <span>What if I miss a live class?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              Every session is recorded and uploaded the same evening. You keep
+              access to recordings for as long as your account exists, so you can
+              rewatch before a test or an interview.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button type="button" class="accordion-head" data-accordion>
+            <span>Do I get a certificate?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              You get one after finishing all lessons and submitting the final
+              project. It carries a verification code that an employer can check
+              on our site.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button type="button" class="accordion-head" data-accordion>
+            <span>How do I apply to teach on SkillNova?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              Pick "Becoming a trainer" in the form above and tell us what you'd
+              teach and where you've worked. We reply within a week and set up a
+              short sample class.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button type="button" class="accordion-head" data-accordion>
+            <span>Is there a discount for students?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>
+              Yes. Send us a photo of your college ID and we'll issue a coupon
+              code worth 20% off any single course.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

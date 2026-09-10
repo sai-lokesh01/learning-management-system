@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My profile — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="profile">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SHOWN WHEN NOBODY IS LOGGED IN
+  ============================================================= -->
+  <section class="section" id="loginGate" hidden>
+    <div class="container">
+      <div class="empty-state empty-state-lg">
+        <h3>Log in to view your profile</h3>
+        <p class="muted">Your account details are only visible when you're signed in.</p>
+        <div class="gate-actions">
+          <a href="login.html" class="btn btn-primary">Log in</a>
+          <a href="register.html" class="btn btn-outline">Create an account</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EVERYTHING BELOW IS SHOWN ONLY WHEN LOGGED IN
+  ============================================================= -->
+  <div id="profileWrapper" hidden>
+
+    <!-- ---------- PAGE HEADER ---------- -->
+    <section class="page-header">
+      <div class="container">
+        <p class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Profile</span>
+        </p>
+        <h1>Account settings</h1>
+        <p class="page-sub">Update your details, password and preferences.</p>
+      </div>
+    </section>
+
+
+    <main class="section">
+      <div class="container profile-layout">
+
+        <!-- ---------- LEFT: IDENTITY CARD + MENU ---------- -->
+        <aside class="profile-side">
+
+          <div class="profile-card">
+            <div class="avatar avatar-lg" id="profileAvatar">A</div>
+            <h2 class="profile-name" id="profileName">Your name</h2>
+            <p class="muted small" id="profileEmail">you@example.com</p>
+            <span class="role-tag" id="profileRole">Student</span>
+
+            <dl class="profile-facts">
+              <div class="profile-fact">
+                <dt>Member since</dt>
+                <dd id="profileJoined">—</dd>
+              </div>
+              <div class="profile-fact">
+                <dt>Courses enrolled</dt>
+                <dd id="profileEnrolled">0</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Side menu: JS swaps the panel on the right -->
+          <nav class="profile-menu" id="profileMenu">
+            <button type="button" class="profile-menu-item active" data-panel="details">
+              Personal details
+            </button>
+            <button type="button" class="profile-menu-item" data-panel="password">
+              Password
+            </button>
+            <button type="button" class="profile-menu-item" data-panel="orders">
+              Order history
+            </button>
+            <button type="button" class="profile-menu-item" data-panel="preferences">
+              Preferences
+            </button>
+            <button type="button" class="profile-menu-item danger" data-panel="danger">
+              Delete account
+            </button>
+          </nav>
+
+          <button type="button" class="btn btn-outline btn-block" id="logoutBtn">Log out</button>
+
+        </aside>
+
+
+        <!-- ---------- RIGHT: PANELS ---------- -->
+        <div class="profile-main">
+
+          <div class="alert" id="formAlert" hidden></div>
+
+          <!-- ----- PANEL 1: PERSONAL DETAILS ----- -->
+          <section class="form-card profile-panel active" id="panel-details">
+            <h2 class="form-card-title">Personal details</h2>
+
+            <form id="detailsForm" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fullName">Full name</label>
+                  <input type="text" id="fullName" class="form-input" />
+                  <p class="form-error" id="fullNameError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone number</label>
+                  <input type="tel" id="phone" class="form-input" />
+                  <p class="form-error" id="phoneError"></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email address</label>
+                <input type="email" id="email" class="form-input" readonly />
+                <p class="form-hint muted small">Email can't be changed in this demo.</p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="city">City</label>
+                <input type="text" id="city" class="form-input" placeholder="Hyderabad" />
+                <p class="form-error" id="cityError"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="bio">About you</label>
+                <textarea id="bio" class="form-input form-textarea" rows="3"
+                          placeholder="A line or two about what you're learning."></textarea>
+                <p class="form-hint muted small">
+                  <span id="bioCount">0</span> / 200 characters
+                </p>
+              </div>
+
+              <div class="form-actions form-actions-left">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-outline" id="resetDetailsBtn">Cancel</button>
+              </div>
+
+            </form>
+          </section>
+
+          <!-- ----- PANEL 2: PASSWORD ----- -->
+          <section class="form-card profile-panel" id="panel-password">
+            <h2 class="form-card-title">Change password</h2>
+
+            <form id="passwordForm" novalidate>
+
+              <div class="form-group">
+                <label class="form-label" for="currentPassword">Current password</label>
+                <input type="password" id="currentPassword" class="form-input" />
+                <p class="form-error" id="currentPasswordError"></p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="newPassword">New password</label>
+                  <input type="password" id="newPassword" class="form-input"
+                         placeholder="At least 6 characters" />
+                  <p class="form-error" id="newPasswordError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="confirmNewPassword">Confirm new password</label>
+                  <input type="password" id="confirmNewPassword" class="form-input" />
+                  <p class="form-error" id="confirmNewPasswordError"></p>
+                </div>
+              </div>
+
+              <div class="form-actions form-actions-left">
+                <button type="submit" class="btn btn-primary">Update password</button>
+              </div>
+
+            </form>
+          </section>
+
+          <!-- ----- PANEL 3: ORDER HISTORY ----- -->
+          <section class="form-card profile-panel" id="panel-orders">
+            <h2 class="form-card-title">Order history</h2>
+
+            <!-- JS builds one .order-row per past order inside this div -->
+            <div class="order-list" id="orderList"></div>
+
+            <div class="empty-state" id="noOrders" hidden>
+              <h3>No orders yet</h3>
+              <p class="muted">Your purchases will be listed here.</p>
+              <a href="courses.html" class="btn btn-primary">Browse courses</a>
+            </div>
+          </section>
+
+          <!-- ----- PANEL 4: PREFERENCES ----- -->
+          <section class="form-card profile-panel" id="panel-preferences">
+            <h2 class="form-card-title">Preferences</h2>
+
+            <div class="toggle-list">
+              <label class="toggle-row">
+                <span class="toggle-text">
+                  <strong>Course updates</strong>
+                  <span class="muted small">New lessons and schedule changes.</span>
+                </span>
+                <input type="checkbox" id="prefUpdates" checked />
+              </label>
+
+              <label class="toggle-row">
+                <span class="toggle-text">
+                  <strong>Assignment reminders</strong>
+                  <span class="muted small">A nudge before each deadline.</span>
+                </span>
+                <input type="checkbox" id="prefReminders" checked />
+              </label>
+
+              <label class="toggle-row">
+                <span class="toggle-text">
+                  <strong>Offers and discounts</strong>
+                  <span class="muted small">Occasional coupons on new courses.</span>
+                </span>
+                <input type="checkbox" id="prefOffers" />
+              </label>
+            </div>
+
+            <div class="form-actions form-actions-left">
+              <button type="button" class="btn btn-primary" id="savePrefsBtn">Save preferences</button>
+            </div>
+          </section>
+
+          <!-- ----- PANEL 5: DELETE ACCOUNT ----- -->
+          <section class="form-card profile-panel danger-card" id="panel-danger">
+            <h2 class="form-card-title">Delete account</h2>
+            <p class="panel-text">
+              This removes your account, your enrolled courses and your order history
+              from this device. It can't be undone.
+            </p>
+
+            <div class="form-group">
+              <label class="form-label" for="deleteConfirm">Type DELETE to confirm</label>
+              <input type="text" id="deleteConfirm" class="form-input" placeholder="DELETE" />
+              <p class="form-error" id="deleteConfirmError"></p>
+            </div>
+
+            <button type="button" class="btn btn-danger" id="deleteAccountBtn">
+              Delete my account
+            </button>
+          </section>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

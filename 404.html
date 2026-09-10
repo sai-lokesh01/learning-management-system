@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="notfound">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       NOT FOUND
+  ============================================================= -->
+  <main class="notfound">
+    <div class="container notfound-inner">
+
+      <p class="notfound-code">404</p>
+      <h1>This page doesn't exist</h1>
+      <p class="notfound-sub">
+        The link may be old, or the address has a typo in it. Nothing is broken
+        on your side.
+      </p>
+
+      <!-- Search box, sends you to the courses page with your term -->
+      <div class="hero-search notfound-search">
+        <input type="text" id="notFoundSearch" placeholder="Search for a course instead" />
+        <button class="btn btn-primary" id="notFoundSearchBtn">Search</button>
+      </div>
+
+      <div class="notfound-actions">
+        <a href="index.html" class="btn btn-primary">Go to home</a>
+        <!-- JS wires this to the browser's back button -->
+        <button type="button" class="btn btn-outline" id="goBackBtn">Go back</button>
+      </div>
+
+      <div class="notfound-links">
+        <h2 class="side-title">Or try one of these</h2>
+        <ul class="link-list">
+          <li><a href="courses.html">Browse all courses</a></li>
+          <li><a href="my-courses.html">My learning</a></li>
+          <li><a href="cart.html">Your cart</a></li>
+          <li><a href="contact.html">Contact support</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

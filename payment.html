@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="payment">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER + PROGRESS STEPS
+  ============================================================= -->
+  <section class="page-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="cart.html">Cart</a>
+        <span>/</span>
+        <a href="checkout.html">Checkout</a>
+        <span>/</span>
+        <span>Payment</span>
+      </p>
+      <h1>Payment</h1>
+
+      <ol class="checkout-steps">
+        <li class="checkout-step done">
+          <span class="checkout-step-number">1</span>
+          <span>Cart</span>
+        </li>
+        <li class="checkout-step done">
+          <span class="checkout-step-number">2</span>
+          <span>Details</span>
+        </li>
+        <li class="checkout-step current">
+          <span class="checkout-step-number">3</span>
+          <span>Payment</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PAYMENT
+  ============================================================= -->
+  <main class="section">
+    <div class="container">
+
+      <!-- Reminder that no real money moves here -->
+      <div class="notice-bar">
+        <strong>Practice mode.</strong>
+        This is a demo project. Don't enter a real card number — any 16 digits will work.
+      </div>
+
+      <div class="cart-layout" id="paymentLayout">
+
+        <!-- ---------- LEFT: PAYMENT METHODS ---------- -->
+        <div class="cart-main">
+
+          <div class="alert" id="formAlert" hidden></div>
+
+          <!-- Method picker: JS shows the matching panel below -->
+          <div class="method-list" id="methodList">
+            <label class="method-option">
+              <input type="radio" name="method" value="card" checked />
+              <span class="method-info">
+                <strong>Card</strong>
+                <span class="muted small">Credit or debit card</span>
+              </span>
+            </label>
+
+            <label class="method-option">
+              <input type="radio" name="method" value="upi" />
+              <span class="method-info">
+                <strong>UPI</strong>
+                <span class="muted small">Pay using a UPI ID</span>
+              </span>
+            </label>
+
+            <label class="method-option">
+              <input type="radio" name="method" value="netbanking" />
+              <span class="method-info">
+                <strong>Net banking</strong>
+                <span class="muted small">Pay through your bank</span>
+              </span>
+            </label>
+          </div>
+
+          <form id="paymentForm" novalidate>
+
+            <!-- ----- PANEL 1: CARD ----- -->
+            <section class="form-card method-panel active" id="panel-card">
+              <h2 class="form-card-title">Card details</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="cardNumber">Card number</label>
+                <input type="text" id="cardNumber" class="form-input"
+                       placeholder="1234 5678 9012 3456" inputmode="numeric" maxlength="19" />
+                <p class="form-error" id="cardNumberError"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cardName">Name on card</label>
+                <input type="text" id="cardName" class="form-input" placeholder="ARPAN AKARAPU" />
+                <p class="form-error" id="cardNameError"></p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="cardExpiry">Expiry date</label>
+                  <input type="text" id="cardExpiry" class="form-input"
+                         placeholder="MM/YY" inputmode="numeric" maxlength="5" />
+                  <p class="form-error" id="cardExpiryError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="cardCvv">CVV</label>
+                  <input type="password" id="cardCvv" class="form-input"
+                         placeholder="3 digits" inputmode="numeric" maxlength="3" />
+                  <p class="form-error" id="cardCvvError"></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- ----- PANEL 2: UPI ----- -->
+            <section class="form-card method-panel" id="panel-upi">
+              <h2 class="form-card-title">UPI</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="upiId">UPI ID</label>
+                <input type="text" id="upiId" class="form-input" placeholder="yourname@bank" />
+                <p class="form-hint muted small">You'll get a request in your UPI app.</p>
+                <p class="form-error" id="upiIdError"></p>
+              </div>
+            </section>
+
+            <!-- ----- PANEL 3: NET BANKING ----- -->
+            <section class="form-card method-panel" id="panel-netbanking">
+              <h2 class="form-card-title">Net banking</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="bankSelect">Choose your bank</label>
+                <select id="bankSelect" class="form-select form-select-block">
+                  <option value="">Select a bank</option>
+                  <option>State Bank of India</option>
+                  <option>HDFC Bank</option>
+                  <option>ICICI Bank</option>
+                  <option>Axis Bank</option>
+                  <option>Kotak Mahindra Bank</option>
+                  <option>Punjab National Bank</option>
+                  <option>Bank of Baroda</option>
+                  <option>Union Bank of India</option>
+                </select>
+                <p class="form-error" id="bankSelectError"></p>
+              </div>
+            </section>
+
+            <div class="form-actions">
+              <a href="checkout.html" class="btn btn-outline">Back to details</a>
+              <!-- JS rewrites this label with the real amount -->
+              <button type="submit" class="btn btn-primary" id="payBtn">Pay now</button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ---------- RIGHT: ORDER SUMMARY ---------- -->
+        <aside class="summary-card">
+          <h2 class="summary-title">You're paying for</h2>
+
+          <div class="summary-items" id="summaryItems"></div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">₹0</span>
+          </div>
+
+          <div class="summary-row summary-row-discount" id="discountRow" hidden>
+            <span>Discount (<span id="appliedCouponName">—</span>)</span>
+            <span id="summaryDiscount">−₹0</span>
+          </div>
+
+          <div class="summary-row">
+            <span>GST (18%)</span>
+            <span id="summaryTax">₹0</span>
+          </div>
+
+          <div class="summary-row summary-total">
+            <span>Total payable</span>
+            <span id="summaryTotal">₹0</span>
+          </div>
+
+          <!-- Billing name and email carried over from checkout.html -->
+          <div class="summary-billing" id="summaryBilling"></div>
+
+          <a href="checkout.html" class="link small">Edit details</a>
+        </aside>
+
+      </div>
+
+      <!-- Shown by JS if the cart is empty or checkout was skipped -->
+      <div class="empty-state empty-state-lg" id="paymentEmpty" hidden>
+        <h3>Nothing to pay for</h3>
+        <p class="muted">Your cart is empty, or you haven't filled in your details yet.</p>
+        <a href="courses.html" class="btn btn-primary">Browse courses</a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       PROCESSING OVERLAY
+       Covers the screen for a couple of seconds after "Pay now",
+       to imitate a real payment gateway.
+  ============================================================= -->
+  <div class="overlay" id="processingOverlay" hidden>
+    <div class="overlay-box">
+      <div class="spinner"></div>
+      <h3>Processing your payment</h3>
+      <p class="muted small">Don't close or refresh this page.</p>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

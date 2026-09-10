@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your cart — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="cart">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+  ============================================================= -->
+  <section class="page-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Cart</span>
+      </p>
+      <h1>Your cart</h1>
+      <!-- JS writes "3 courses in your cart" here -->
+      <p class="page-sub" id="cartSummaryLine">Loading your cart…</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CART
+  ============================================================= -->
+  <main class="section">
+    <div class="container">
+
+      <!-- Shown by JS when the cart has at least one course -->
+      <div class="cart-layout" id="cartLayout" hidden>
+
+        <!-- ---------- LEFT: ITEM LIST ---------- -->
+        <div class="cart-main">
+
+          <div class="cart-toolbar">
+            <span class="muted small" id="cartItemCount">0 items</span>
+            <button type="button" class="link small" id="clearCartBtn">Remove all</button>
+          </div>
+
+          <!-- JS builds one .cart-item per course inside this div -->
+          <div class="cart-list" id="cartList"></div>
+
+          <a href="courses.html" class="link">Keep browsing courses</a>
+        </div>
+
+        <!-- ---------- RIGHT: PRICE SUMMARY ---------- -->
+        <aside class="summary-card">
+          <h2 class="summary-title">Order summary</h2>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">₹0</span>
+          </div>
+
+          <!-- Hidden until a coupon is applied -->
+          <div class="summary-row summary-row-discount" id="discountRow" hidden>
+            <span>Discount (<span id="appliedCouponName">—</span>)</span>
+            <span id="summaryDiscount">−₹0</span>
+          </div>
+
+          <div class="summary-row">
+            <span>GST (18%)</span>
+            <span id="summaryTax">₹0</span>
+          </div>
+
+          <div class="summary-row summary-total">
+            <span>Total</span>
+            <span id="summaryTotal">₹0</span>
+          </div>
+
+          <!-- ----- Coupon box ----- -->
+          <div class="coupon-box">
+            <label class="form-label" for="couponInput">Have a coupon?</label>
+            <div class="coupon-row">
+              <input type="text" id="couponInput" class="form-input" placeholder="e.g. LEARN20" />
+              <button type="button" class="btn btn-outline" id="applyCouponBtn">Apply</button>
+            </div>
+            <p class="form-error" id="couponError"></p>
+            <p class="coupon-success" id="couponSuccess" hidden></p>
+            <button type="button" class="link small" id="removeCouponBtn" hidden>Remove coupon</button>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary btn-block" id="checkoutBtn">
+            Proceed to checkout
+          </a>
+
+          <p class="muted small summary-note">
+            Prices include all taxes shown above. You can cancel within 7 days.
+          </p>
+        </aside>
+
+      </div>
+
+
+      <!-- Shown by JS when the cart is empty -->
+      <div class="empty-state empty-state-lg" id="cartEmpty" hidden>
+        <h3>Your cart is empty</h3>
+        <p class="muted">Courses you add will show up here, saved on this device.</p>
+        <a href="courses.html" class="btn btn-primary">Browse courses</a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       SAVED FOR LATER
+  ============================================================= -->
+  <section class="section section-alt" id="wishlistSection" hidden>
+    <div class="container">
+      <div class="section-head">
+        <h2>Saved for later</h2>
+        <span class="muted small" id="wishlistCount">0 courses</span>
+      </div>
+
+      <!-- JS builds course cards inside this div -->
+      <div class="course-grid course-grid-4" id="wishlistGrid"></div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

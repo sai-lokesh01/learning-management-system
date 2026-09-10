@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="register">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       REGISTER FORM
+  ============================================================= -->
+  <main class="auth">
+    <div class="container auth-inner">
+
+      <!-- Left side: the form -->
+      <div class="auth-card">
+        <h1 class="auth-title">Create your account</h1>
+        <p class="auth-sub">Free to join. Pay only for the courses you take.</p>
+
+        <!-- Shown by JS when something goes wrong or right -->
+        <div class="alert" id="formAlert" hidden></div>
+
+        <!--
+          novalidate turns off the browser's own popup messages,
+          so our JavaScript can show its own error text instead.
+        -->
+        <form id="registerForm" novalidate>
+
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full name</label>
+            <input type="text" id="fullName" class="form-input" placeholder="Arpan Akarapu" />
+            <p class="form-error" id="fullNameError"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" class="form-input" placeholder="you@example.com" />
+            <p class="form-error" id="emailError"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone number</label>
+            <input type="tel" id="phone" class="form-input" placeholder="10-digit mobile number" />
+            <p class="form-error" id="phoneError"></p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-with-button">
+                <input type="password" id="password" class="form-input" placeholder="At least 6 characters" />
+                <button type="button" class="reveal-btn" id="togglePassword">Show</button>
+              </div>
+              <p class="form-error" id="passwordError"></p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="confirmPassword">Confirm password</label>
+              <input type="password" id="confirmPassword" class="form-input" placeholder="Type it again" />
+              <p class="form-error" id="confirmPasswordError"></p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="form-label">I am joining as</span>
+            <div class="role-options">
+              <label class="role-option">
+                <input type="radio" name="role" value="student" checked />
+                <span>Student</span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="role" value="trainer" />
+                <span>Trainer</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-row">
+              <input type="checkbox" id="terms" />
+              <span>I agree to the terms of use and privacy policy.</span>
+            </label>
+            <p class="form-error" id="termsError"></p>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Create account</button>
+
+        </form>
+
+        <p class="auth-switch">
+          Already have an account?
+          <a href="login.html" class="link">Log in</a>
+        </p>
+      </div>
+
+      <!-- Right side: supporting panel -->
+      <aside class="auth-side">
+        <h2>What you get</h2>
+        <ul class="tick-list">
+          <li>Live classes with recordings you can rewatch</li>
+          <li>Downloadable notes for every session</li>
+          <li>Assignments reviewed by your trainer</li>
+          <li>A certificate when you finish a course</li>
+        </ul>
+
+        <div class="auth-quote">
+          <p>"I went from zero to my first internship in five months."</p>
+          <p class="muted small">Sneha R. · Web Development batch</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

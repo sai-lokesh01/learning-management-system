@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My learning — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="mycourses">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SHOWN WHEN NOBODY IS LOGGED IN
+  ============================================================= -->
+  <section class="section" id="loginGate" hidden>
+    <div class="container">
+      <div class="empty-state empty-state-lg">
+        <h3>Log in to see your courses</h3>
+        <p class="muted">Your enrolled courses and progress are tied to your account.</p>
+        <div class="gate-actions">
+          <a href="login.html" class="btn btn-primary">Log in</a>
+          <a href="register.html" class="btn btn-outline">Create an account</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EVERYTHING BELOW IS SHOWN ONLY WHEN LOGGED IN
+  ============================================================= -->
+  <div id="dashboardWrapper" hidden>
+
+    <!-- ---------- WELCOME + STATS ---------- -->
+    <section class="page-header">
+      <div class="container">
+        <p class="breadcrumb">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>My learning</span>
+        </p>
+
+        <!-- JS writes "Welcome back, Arpan" here -->
+        <h1 id="welcomeHeading">My learning</h1>
+        <p class="page-sub" id="welcomeSub">Pick up where you left off.</p>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <strong id="statEnrolled">0</strong>
+            <span>Courses enrolled</span>
+          </div>
+          <div class="stat-box">
+            <strong id="statProgress">0</strong>
+            <span>In progress</span>
+          </div>
+          <div class="stat-box">
+            <strong id="statCompleted">0</strong>
+            <span>Completed</span>
+          </div>
+          <div class="stat-box">
+            <strong id="statHours">0</strong>
+            <span>Hours of content</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ---------- CONTINUE WHERE YOU LEFT OFF ---------- -->
+    <section class="section" id="continueSection" hidden>
+      <div class="container">
+        <h2 class="section-title">Continue learning</h2>
+
+        <div class="continue-card">
+          <div class="continue-thumb" id="continueThumb"></div>
+
+          <div class="continue-body">
+            <p class="course-category" id="continueCategory">Category</p>
+            <h3 id="continueTitle">Course title</h3>
+            <p class="muted small" id="continueLesson">Next up: lesson name</p>
+
+            <div class="progress">
+              <div class="progress-bar" id="continueBar" style="width: 0%"></div>
+            </div>
+            <p class="muted small" id="continuePercent">0% complete</p>
+          </div>
+
+          <div class="continue-action">
+            <a href="#" class="btn btn-primary" id="continueBtn">Resume course</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ---------- ENROLLED COURSES ---------- -->
+    <main class="section section-alt">
+      <div class="container">
+
+        <div class="section-head">
+          <h2>Your courses</h2>
+          <label class="sort-field">
+            <span class="sort-label">Sort</span>
+            <select id="mySortSelect" class="form-select">
+              <option value="recent">Recently enrolled</option>
+              <option value="progress">Progress</option>
+              <option value="title">Course name</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Filter tabs -->
+        <div class="tabs" id="myTabs">
+          <button type="button" class="tab active" data-filter="all">
+            All <span class="tab-count" id="countAll">0</span>
+          </button>
+          <button type="button" class="tab" data-filter="progress">
+            In progress <span class="tab-count" id="countProgress">0</span>
+          </button>
+          <button type="button" class="tab" data-filter="completed">
+            Completed <span class="tab-count" id="countCompleted">0</span>
+          </button>
+        </div>
+
+        <!-- JS builds one .enrolled-card per course inside this div -->
+        <div class="enrolled-grid" id="enrolledGrid"></div>
+
+        <!-- Shown when the user has bought nothing yet -->
+        <div class="empty-state empty-state-lg" id="noCourses" hidden>
+          <h3>You haven't enrolled in anything yet</h3>
+          <p class="muted">Once you buy a course, it shows up here with your progress.</p>
+          <a href="courses.html" class="btn btn-primary">Browse courses</a>
+        </div>
+
+        <!-- Shown when a filter tab has no matches -->
+        <div class="empty-state" id="noFilterMatch" hidden>
+          <h3>Nothing in this tab yet</h3>
+          <p class="muted">Try the All tab to see everything you're enrolled in.</p>
+        </div>
+
+      </div>
+    </main>
+
+
+    <!-- ---------- SAVED FOR LATER ---------- -->
+    <section class="section" id="wishlistSection" hidden>
+      <div class="container">
+        <div class="section-head">
+          <h2>Saved for later</h2>
+          <a href="courses.html" class="link">Find more courses</a>
+        </div>
+
+        <div class="course-grid course-grid-4" id="wishlistGrid"></div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All courses — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="courses">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER
+  ============================================================= -->
+  <section class="page-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>Courses</span>
+      </p>
+      <h1>All courses</h1>
+      <p class="page-sub">Browse everything on SkillNova. Filter by category, level or price.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       COURSES: FILTERS + RESULTS
+  ============================================================= -->
+  <main class="section">
+    <div class="container courses-layout">
+
+      <!-- ---------- LEFT: FILTER PANEL ---------- -->
+      <aside class="filter-panel" id="filterPanel">
+
+        <div class="filter-head">
+          <h2 class="filter-heading">Filters</h2>
+          <button type="button" class="link small" id="clearFiltersBtn">Clear all</button>
+        </div>
+
+        <!-- Category -->
+        <div class="filter-group">
+          <h3 class="filter-title">Category</h3>
+          <div class="checkbox-list" id="categoryFilters">
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Web Development" />
+              <span>Web Development</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Data Science" />
+              <span>Data Science</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Programming" />
+              <span>Programming</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Design" />
+              <span>Design</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Cloud &amp; DevOps" />
+              <span>Cloud &amp; DevOps</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="category" value="Business" />
+              <span>Business</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Level -->
+        <div class="filter-group">
+          <h3 class="filter-title">Level</h3>
+          <div class="checkbox-list" id="levelFilters">
+            <label class="filter-check">
+              <input type="checkbox" name="level" value="Beginner" />
+              <span>Beginner</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="level" value="Intermediate" />
+              <span>Intermediate</span>
+            </label>
+            <label class="filter-check">
+              <input type="checkbox" name="level" value="Advanced" />
+              <span>Advanced</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="filter-group">
+          <h3 class="filter-title">Price</h3>
+          <div class="checkbox-list" id="priceFilters">
+            <label class="filter-check">
+              <input type="radio" name="price" value="all" checked />
+              <span>Any price</span>
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="price" value="free" />
+              <span>Free only</span>
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="price" value="under1500" />
+              <span>Under ₹1,500</span>
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="price" value="1500plus" />
+              <span>₹1,500 and above</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Rating -->
+        <div class="filter-group">
+          <h3 class="filter-title">Rating</h3>
+          <div class="checkbox-list" id="ratingFilters">
+            <label class="filter-check">
+              <input type="radio" name="rating" value="0" checked />
+              <span>Any rating</span>
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="rating" value="4.5" />
+              <span>4.5 and above</span>
+            </label>
+            <label class="filter-check">
+              <input type="radio" name="rating" value="4" />
+              <span>4.0 and above</span>
+            </label>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- ---------- RIGHT: TOOLBAR + RESULTS ---------- -->
+      <div class="courses-main">
+
+        <!-- Search, sort, and the mobile filter button -->
+        <div class="toolbar">
+          <div class="search-field">
+            <input type="text" id="courseSearch" class="form-input"
+                   placeholder="Search courses, topics or trainers" />
+          </div>
+
+          <div class="toolbar-right">
+            <button type="button" class="btn btn-outline btn-sm filter-toggle" id="filterToggle">
+              Filters
+            </button>
+
+            <label class="sort-field">
+              <span class="sort-label">Sort</span>
+              <select id="sortSelect" class="form-select">
+                <option value="popular">Most popular</option>
+                <option value="rating">Highest rated</option>
+                <option value="price-low">Price: low to high</option>
+                <option value="price-high">Price: high to low</option>
+                <option value="newest">Newest first</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <!-- JS writes something like "Showing 8 of 12 courses" here -->
+        <p class="results-count" id="resultsCount">Loading courses…</p>
+
+        <!-- JS builds one .course-card per course inside this div -->
+        <div class="course-grid course-grid-3" id="courseGrid"></div>
+
+        <!-- Shown by JS only when no course matches the filters -->
+        <div class="empty-state" id="emptyState" hidden>
+          <h3>No courses match these filters</h3>
+          <p class="muted">Try removing a filter or searching for something broader.</p>
+          <button type="button" class="btn btn-primary" id="emptyResetBtn">Clear filters</button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>

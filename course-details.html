@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course details — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="details">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SHOWN ONLY IF THE ?id= IN THE URL IS MISSING OR WRONG
+  ============================================================= -->
+  <section class="section" id="notFoundBlock" hidden>
+    <div class="container">
+      <div class="empty-state">
+        <h3>We couldn't find that course</h3>
+        <p class="muted">The link may be broken, or the course was removed.</p>
+        <a href="courses.html" class="btn btn-primary">Back to all courses</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EVERYTHING BELOW IS HIDDEN UNTIL JS LOADS THE COURSE
+  ============================================================= -->
+  <div id="courseWrapper" hidden>
+
+    <!-- ---------- DARK COURSE HEADER ---------- -->
+    <section class="course-hero">
+      <div class="container course-hero-inner">
+
+        <div class="course-hero-text">
+          <p class="breadcrumb breadcrumb-light">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <a href="courses.html">Courses</a>
+            <span>/</span>
+            <span id="crumbTitle">Course</span>
+          </p>
+
+          <p class="course-hero-category" id="detailCategory">Category</p>
+          <h1 id="detailTitle">Course title</h1>
+          <p class="course-hero-sub" id="detailTagline">Short course description goes here.</p>
+
+          <div class="course-hero-meta">
+            <span class="rating" id="detailRating">0.0 ★</span>
+            <span id="detailReviewCount">0 reviews</span>
+            <span id="detailStudents">0 learners</span>
+            <span id="detailLevel">Level</span>
+          </div>
+
+          <p class="course-hero-author">
+            Taught by <strong id="detailInstructor">Instructor name</strong>
+          </p>
+        </div>
+
+        <!-- ---------- PURCHASE CARD ---------- -->
+        <aside class="buy-card" id="buyCard">
+          <div class="buy-thumb" id="detailThumb"></div>
+
+          <div class="buy-body">
+            <p class="buy-price" id="detailPrice">₹0</p>
+
+            <button type="button" class="btn btn-primary btn-block" id="addToCartBtn">
+              Add to cart
+            </button>
+            <button type="button" class="btn btn-outline btn-block" id="wishlistBtn">
+              Save for later
+            </button>
+
+            <p class="buy-note muted small">One-time payment. Lifetime access.</p>
+
+            <ul class="buy-facts">
+              <li><span>Duration</span><strong id="detailDuration">0 hours</strong></li>
+              <li><span>Lessons</span><strong id="detailLessons">0</strong></li>
+              <li><span>Language</span><strong id="detailLanguage">English</strong></li>
+              <li><span>Certificate</span><strong>Yes</strong></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+
+    <!-- ---------- MAIN CONTENT ---------- -->
+    <main class="section">
+      <div class="container detail-layout">
+
+        <div class="detail-main">
+
+          <!-- Tabs -->
+          <div class="tabs" id="detailTabs">
+            <button type="button" class="tab active" data-tab="overview">Overview</button>
+            <button type="button" class="tab" data-tab="syllabus">Syllabus</button>
+            <button type="button" class="tab" data-tab="instructor">Instructor</button>
+            <button type="button" class="tab" data-tab="reviews">Reviews</button>
+          </div>
+
+          <!-- ----- TAB 1: OVERVIEW ----- -->
+          <section class="tab-panel active" id="panel-overview">
+            <h2 class="panel-title">About this course</h2>
+            <p class="panel-text" id="detailDescription">Full description goes here.</p>
+
+            <h2 class="panel-title">What you'll learn</h2>
+            <!-- JS builds <li> items inside this list -->
+            <ul class="tick-list tick-list-2col" id="learnList"></ul>
+
+            <h2 class="panel-title">Requirements</h2>
+            <ul class="bullet-list" id="requirementList"></ul>
+          </section>
+
+          <!-- ----- TAB 2: SYLLABUS (accordion) ----- -->
+          <section class="tab-panel" id="panel-syllabus">
+            <div class="panel-head">
+              <h2 class="panel-title">Course syllabus</h2>
+              <button type="button" class="link small" id="expandAllBtn">Expand all</button>
+            </div>
+
+            <!-- JS builds one .accordion-item per module inside this div -->
+            <div class="accordion" id="syllabusAccordion"></div>
+          </section>
+
+          <!-- ----- TAB 3: INSTRUCTOR ----- -->
+          <section class="tab-panel" id="panel-instructor">
+            <h2 class="panel-title">Your instructor</h2>
+
+            <div class="instructor-card">
+              <div class="avatar" id="instructorAvatar">RM</div>
+              <div class="instructor-info">
+                <h3 id="instructorName">Instructor name</h3>
+                <p class="muted small" id="instructorRole">Role and company</p>
+                <div class="instructor-stats">
+                  <span id="instructorRating">4.8 ★ rating</span>
+                  <span id="instructorStudents">0 learners</span>
+                  <span id="instructorCourses">0 courses</span>
+                </div>
+                <p class="panel-text" id="instructorBio">Short biography goes here.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- ----- TAB 4: REVIEWS ----- -->
+          <section class="tab-panel" id="panel-reviews">
+            <div class="panel-head">
+              <h2 class="panel-title">Learner reviews</h2>
+              <span class="rating" id="reviewsAverage">0.0 ★</span>
+            </div>
+
+            <!-- Form to add your own review -->
+            <div class="review-form">
+              <h3>Leave a review</h3>
+
+              <div class="form-group">
+                <span class="form-label">Your rating</span>
+                <div class="star-picker" id="starPicker">
+                  <button type="button" class="star" data-value="1">★</button>
+                  <button type="button" class="star" data-value="2">★</button>
+                  <button type="button" class="star" data-value="3">★</button>
+                  <button type="button" class="star" data-value="4">★</button>
+                  <button type="button" class="star" data-value="5">★</button>
+                </div>
+                <p class="form-error" id="ratingError"></p>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reviewText">Your review</label>
+                <textarea id="reviewText" class="form-input form-textarea" rows="3"
+                          placeholder="What did you think of this course?"></textarea>
+                <p class="form-error" id="reviewTextError"></p>
+              </div>
+
+              <button type="button" class="btn btn-primary" id="submitReviewBtn">Post review</button>
+            </div>
+
+            <!-- JS builds one .review-item per review inside this div -->
+            <div class="review-list" id="reviewList"></div>
+          </section>
+
+        </div>
+
+        <!-- ---------- SIDEBAR: RELATED COURSES ---------- -->
+        <aside class="detail-side">
+          <h3 class="side-title">More in this category</h3>
+          <!-- JS builds small course cards inside this div -->
+          <div class="related-list" id="relatedList"></div>
+        </aside>
+
+      </div>
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="checkout">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       PAGE HEADER + PROGRESS STEPS
+  ============================================================= -->
+  <section class="page-header">
+    <div class="container">
+      <p class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="cart.html">Cart</a>
+        <span>/</span>
+        <span>Checkout</span>
+      </p>
+      <h1>Checkout</h1>
+
+      <!-- Three-step tracker, reused on payment.html and success.html -->
+      <ol class="checkout-steps">
+        <li class="checkout-step done">
+          <span class="checkout-step-number">1</span>
+          <span>Cart</span>
+        </li>
+        <li class="checkout-step current">
+          <span class="checkout-step-number">2</span>
+          <span>Details</span>
+        </li>
+        <li class="checkout-step">
+          <span class="checkout-step-number">3</span>
+          <span>Payment</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CHECKOUT
+  ============================================================= -->
+  <main class="section">
+    <div class="container">
+
+      <div class="cart-layout" id="checkoutLayout">
+
+        <!-- ---------- LEFT: BILLING FORM ---------- -->
+        <div class="cart-main">
+
+          <div class="alert" id="formAlert" hidden></div>
+
+          <form id="checkoutForm" novalidate>
+
+            <!-- ----- Who is buying ----- -->
+            <section class="form-card">
+              <h2 class="form-card-title">Contact details</h2>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fullName">Full name</label>
+                  <input type="text" id="fullName" class="form-input" placeholder="Arpan Akarapu" />
+                  <p class="form-error" id="fullNameError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone number</label>
+                  <input type="tel" id="phone" class="form-input" placeholder="10-digit mobile number" />
+                  <p class="form-error" id="phoneError"></p>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email address</label>
+                <input type="email" id="email" class="form-input" placeholder="you@example.com" />
+                <p class="form-hint muted small">Your invoice and course access links go here.</p>
+                <p class="form-error" id="emailError"></p>
+              </div>
+            </section>
+
+            <!-- ----- Billing address ----- -->
+            <section class="form-card">
+              <h2 class="form-card-title">Billing address</h2>
+
+              <div class="form-group">
+                <label class="form-label" for="address">Address</label>
+                <input type="text" id="address" class="form-input" placeholder="House number, street, area" />
+                <p class="form-error" id="addressError"></p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="city">City</label>
+                  <input type="text" id="city" class="form-input" placeholder="Hyderabad" />
+                  <p class="form-error" id="cityError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="state">State</label>
+                  <select id="state" class="form-select form-select-block">
+                    <option value="">Select a state</option>
+                    <option>Andhra Pradesh</option>
+                    <option>Delhi</option>
+                    <option>Gujarat</option>
+                    <option>Karnataka</option>
+                    <option>Kerala</option>
+                    <option>Maharashtra</option>
+                    <option>Tamil Nadu</option>
+                    <option>Telangana</option>
+                    <option>Uttar Pradesh</option>
+                    <option>West Bengal</option>
+                    <option>Other</option>
+                  </select>
+                  <p class="form-error" id="stateError"></p>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="pincode">PIN code</label>
+                  <input type="text" id="pincode" class="form-input" placeholder="6-digit PIN" />
+                  <p class="form-error" id="pincodeError"></p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="country">Country</label>
+                  <input type="text" id="country" class="form-input" value="India" readonly />
+                </div>
+              </div>
+            </section>
+
+            <!-- ----- Optional GST details ----- -->
+            <section class="form-card">
+              <label class="checkbox-row">
+                <input type="checkbox" id="gstToggle" />
+                <span>I'm buying for a company and need a GST invoice</span>
+              </label>
+
+              <!-- Revealed by JS when the checkbox above is ticked -->
+              <div class="reveal-block" id="gstBlock" hidden>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="companyName">Company name</label>
+                    <input type="text" id="companyName" class="form-input" placeholder="Company Pvt Ltd" />
+                    <p class="form-error" id="companyNameError"></p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="gstNumber">GSTIN</label>
+                    <input type="text" id="gstNumber" class="form-input" placeholder="15-character GSTIN" />
+                    <p class="form-error" id="gstNumberError"></p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ----- Save details for next time ----- -->
+            <section class="form-card">
+              <label class="checkbox-row">
+                <input type="checkbox" id="saveDetails" checked />
+                <span>Save these details on this device for next time</span>
+              </label>
+            </section>
+
+            <div class="form-actions">
+              <a href="cart.html" class="btn btn-outline">Back to cart</a>
+              <button type="submit" class="btn btn-primary">Continue to payment</button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- ---------- RIGHT: ORDER SUMMARY ---------- -->
+        <aside class="summary-card">
+          <h2 class="summary-title">Order summary</h2>
+
+          <!-- JS builds one .summary-item per course inside this div -->
+          <div class="summary-items" id="summaryItems"></div>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="summarySubtotal">₹0</span>
+          </div>
+
+          <div class="summary-row summary-row-discount" id="discountRow" hidden>
+            <span>Discount (<span id="appliedCouponName">—</span>)</span>
+            <span id="summaryDiscount">−₹0</span>
+          </div>
+
+          <div class="summary-row">
+            <span>GST (18%)</span>
+            <span id="summaryTax">₹0</span>
+          </div>
+
+          <div class="summary-row summary-total">
+            <span>Total payable</span>
+            <span id="summaryTotal">₹0</span>
+          </div>
+
+          <a href="cart.html" class="link small">Edit cart</a>
+
+          <p class="muted small summary-note">
+            Nothing is charged yet. You'll confirm on the next screen.
+          </p>
+        </aside>
+
+      </div>
+
+      <!-- Shown by JS if someone opens this page with an empty cart -->
+      <div class="empty-state empty-state-lg" id="checkoutEmpty" hidden>
+        <h3>There's nothing to check out</h3>
+        <p class="muted">Add a course to your cart first.</p>
+        <a href="courses.html" class="btn btn-primary">Browse courses</a>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

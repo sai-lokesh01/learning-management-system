@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order confirmed — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="success">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       SHOWN IF SOMEONE OPENS THIS PAGE WITHOUT BUYING ANYTHING
+  ============================================================= -->
+  <section class="section" id="noOrderBlock" hidden>
+    <div class="container">
+      <div class="empty-state empty-state-lg">
+        <h3>No recent order found</h3>
+        <p class="muted">This page shows your confirmation right after a purchase.</p>
+        <a href="courses.html" class="btn btn-primary">Browse courses</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EVERYTHING BELOW IS SHOWN ONLY WHEN AN ORDER EXISTS
+  ============================================================= -->
+  <div id="successWrapper" hidden>
+
+    <!-- ---------- CONFIRMATION BANNER ---------- -->
+    <section class="success-banner">
+      <div class="container success-banner-inner">
+        <div class="success-tick">✓</div>
+        <h1>Payment successful</h1>
+        <p class="success-sub">
+          You're enrolled. A receipt has been sent to
+          <strong id="orderEmail">your email</strong>.
+        </p>
+
+        <div class="success-actions">
+          <a href="my-courses.html" class="btn btn-accent">Start learning</a>
+          <a href="courses.html" class="btn btn-outline btn-on-dark">Browse more courses</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ---------- ORDER DETAILS ---------- -->
+    <main class="section">
+      <div class="container cart-layout">
+
+        <!-- ----- LEFT: RECEIPT ----- -->
+        <div class="cart-main">
+
+          <section class="form-card">
+            <div class="receipt-head">
+              <div>
+                <h2 class="form-card-title">Order receipt</h2>
+                <p class="muted small">Keep this for your records.</p>
+              </div>
+              <!-- Opens the browser's print dialog -->
+              <button type="button" class="btn btn-outline btn-sm" id="printBtn">Print</button>
+            </div>
+
+            <dl class="receipt-facts">
+              <div class="receipt-fact">
+                <dt>Order ID</dt>
+                <dd id="orderId">—</dd>
+              </div>
+              <div class="receipt-fact">
+                <dt>Date</dt>
+                <dd id="orderDate">—</dd>
+              </div>
+              <div class="receipt-fact">
+                <dt>Payment method</dt>
+                <dd id="orderMethod">—</dd>
+              </div>
+              <div class="receipt-fact">
+                <dt>Billed to</dt>
+                <dd id="orderName">—</dd>
+              </div>
+            </dl>
+
+            <h3 class="receipt-subtitle">Courses purchased</h3>
+            <!-- JS builds one .receipt-item per course inside this div -->
+            <div class="receipt-list" id="orderItems"></div>
+
+            <div class="receipt-totals">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="orderSubtotal">₹0</span>
+              </div>
+
+              <div class="summary-row summary-row-discount" id="discountRow" hidden>
+                <span>Discount (<span id="appliedCouponName">—</span>)</span>
+                <span id="orderDiscount">−₹0</span>
+              </div>
+
+              <div class="summary-row">
+                <span>GST (18%)</span>
+                <span id="orderTax">₹0</span>
+              </div>
+
+              <div class="summary-row summary-total">
+                <span>Amount paid</span>
+                <span id="orderTotal">₹0</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- ----- WHAT TO DO NEXT ----- -->
+          <section class="form-card">
+            <h2 class="form-card-title">What happens next</h2>
+
+            <ol class="steps steps-stacked">
+              <li class="step">
+                <span class="step-number">1</span>
+                <h3>Open your courses</h3>
+                <p>Everything you bought is now in My learning, ready to start.</p>
+              </li>
+              <li class="step">
+                <span class="step-number">2</span>
+                <h3>Join the live sessions</h3>
+                <p>Class timings are listed inside each course. Recordings go up the same day.</p>
+              </li>
+              <li class="step">
+                <span class="step-number">3</span>
+                <h3>Submit your assignments</h3>
+                <p>Your trainer reviews each one and leaves feedback.</p>
+              </li>
+            </ol>
+          </section>
+
+        </div>
+
+        <!-- ----- RIGHT: HELP PANEL ----- -->
+        <aside class="summary-card">
+          <h2 class="summary-title">Need help?</h2>
+
+          <p class="muted small">
+            If something looks wrong with this order, get in touch within 7 days
+            and we'll sort it out.
+          </p>
+
+          <ul class="tick-list help-list">
+            <li>Refunds available within 7 days</li>
+            <li>Access never expires</li>
+            <li>Certificate on completion</li>
+          </ul>
+
+          <a href="contact.html" class="btn btn-outline btn-block">Contact support</a>
+          <a href="my-courses.html" class="btn btn-primary btn-block">Go to My learning</a>
+        </aside>
+
+      </div>
+    </main>
+
+  </div>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillNova — Learn skills that get you hired</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Our single stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<!-- data-page tells script.js which page is open -->
+<body data-page="home">
+
+  <!-- ============================================================
+       NAVBAR  (copy this same block into every other page)
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <!-- Hamburger button, only visible on mobile -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================= -->
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <div class="hero-text">
+        <p class="hero-tagline">Live classes · Recorded lessons · Real projects</p>
+        <h1>Learn the skills companies are actually hiring for.</h1>
+        <p class="hero-sub">
+          Short, practical courses in coding, data, design and business —
+          taught by people who do the work every day.
+        </p>
+
+        <!-- This search box will be wired up later -->
+        <div class="hero-search">
+          <input type="text" id="heroSearch" placeholder="What do you want to learn today?" />
+          <button class="btn btn-primary" id="heroSearchBtn">Search</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>120+</strong>
+            <span>Courses</span>
+          </div>
+          <div class="stat">
+            <strong>18,000</strong>
+            <span>Learners</span>
+          </div>
+          <div class="stat">
+            <strong>4.7</strong>
+            <span>Average rating</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="badge">Live now</span>
+            <span class="hero-card-time">7:30 PM</span>
+          </div>
+          <h3>DSA Masterclass: Arrays &amp; Strings</h3>
+          <p class="muted">Session 12 of 40 · Rahul Menon</p>
+          <div class="progress">
+            <div class="progress-bar" style="width: 30%"></div>
+          </div>
+          <p class="muted small">30% complete</p>
+          <a href="courses.html" class="btn btn-primary btn-block">Join class</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CATEGORIES
+  ============================================================= -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Browse by category</h2>
+        <a href="courses.html" class="link">See all courses</a>
+      </div>
+
+      <div class="category-grid">
+        <a href="courses.html" class="category-card">
+          <h3>Web Development</h3>
+          <p>24 courses</p>
+        </a>
+        <a href="courses.html" class="category-card">
+          <h3>Data Science</h3>
+          <p>18 courses</p>
+        </a>
+        <a href="courses.html" class="category-card">
+          <h3>Programming</h3>
+          <p>31 courses</p>
+        </a>
+        <a href="courses.html" class="category-card">
+          <h3>Design</h3>
+          <p>12 courses</p>
+        </a>
+        <a href="courses.html" class="category-card">
+          <h3>Cloud &amp; DevOps</h3>
+          <p>15 courses</p>
+        </a>
+        <a href="courses.html" class="category-card">
+          <h3>Business</h3>
+          <p>20 courses</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FEATURED COURSES
+       (static for now — we'll generate these from courses.json later)
+  ============================================================= -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Popular right now</h2>
+        <a href="courses.html" class="link">See all courses</a>
+      </div>
+
+      <div class="course-grid">
+
+        <article class="course-card">
+          <div class="course-thumb thumb-1">
+            <span class="badge badge-light">Bestseller</span>
+          </div>
+          <div class="course-body">
+            <p class="course-category">Web Development</p>
+            <h3>Complete Web Development Bootcamp</h3>
+            <p class="muted small">Ananya Sharma</p>
+            <div class="course-meta">
+              <span class="rating">4.8 ★</span>
+              <span class="muted small">42 hours</span>
+            </div>
+            <div class="course-footer">
+              <span class="price">₹1,499</span>
+              <a href="course-details.html" class="btn btn-outline btn-sm">View</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card">
+          <div class="course-thumb thumb-2"></div>
+          <div class="course-body">
+            <p class="course-category">Programming</p>
+            <h3>Data Structures &amp; Algorithms in Java</h3>
+            <p class="muted small">Rahul Menon</p>
+            <div class="course-meta">
+              <span class="rating">4.9 ★</span>
+              <span class="muted small">60 hours</span>
+            </div>
+            <div class="course-footer">
+              <span class="price">₹1,999</span>
+              <a href="course-details.html" class="btn btn-outline btn-sm">View</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card">
+          <div class="course-thumb thumb-3"></div>
+          <div class="course-body">
+            <p class="course-category">Data Science</p>
+            <h3>Python for Data Analysis</h3>
+            <p class="muted small">Priya Nair</p>
+            <div class="course-meta">
+              <span class="rating">4.6 ★</span>
+              <span class="muted small">28 hours</span>
+            </div>
+            <div class="course-footer">
+              <span class="price">₹1,299</span>
+              <a href="course-details.html" class="btn btn-outline btn-sm">View</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card">
+          <div class="course-thumb thumb-4">
+            <span class="badge badge-light">Free</span>
+          </div>
+          <div class="course-body">
+            <p class="course-category">Design</p>
+            <h3>UI Design Fundamentals with Figma</h3>
+            <p class="muted small">Kabir Shah</p>
+            <div class="course-meta">
+              <span class="rating">4.5 ★</span>
+              <span class="muted small">14 hours</span>
+            </div>
+            <div class="course-footer">
+              <span class="price">Free</span>
+              <a href="course-details.html" class="btn btn-outline btn-sm">View</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HOW IT WORKS
+  ============================================================= -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+
+      <ol class="steps">
+        <li class="step">
+          <span class="step-number">1</span>
+          <h3>Create your account</h3>
+          <p>Sign up in under a minute and tell us what you want to learn.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">2</span>
+          <h3>Pick your courses</h3>
+          <p>Add courses to your cart and pay once — no subscription.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">3</span>
+          <h3>Learn and get certified</h3>
+          <p>Attend live sessions, submit assignments, and earn a certificate.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CALL TO ACTION
+  ============================================================= -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <div>
+        <h2>Start learning this week.</h2>
+        <p>Join 18,000 learners already building skills on SkillNova.</p>
+      </div>
+      <a href="register.html" class="btn btn-accent">Create free account</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER  (copy this same block into every other page)
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+
+  <!-- Our single JavaScript file -->
+  <script src="js/script.js"></script>
+</body>
+</html>

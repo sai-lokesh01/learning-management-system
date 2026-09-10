@@ -1,0 +1,3129 @@
+/* ==========================================================================
+   SkillNova — single stylesheet for the whole site
+
+   1. RESET & VARIABLES
+   2. BASE ELEMENTS
+   3. REUSABLE PIECES (container, buttons, badges, progress)
+   4. NAVBAR
+   5. FOOTER
+   6. HOME PAGE
+   7. RESPONSIVE
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. RESET & VARIABLES
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colours */
+  --green-900: #0d3b2e;   /* darkest — footer, nav text */
+  --green-700: #14614a;   /* primary brand colour */
+  --green-100: #e3f0ea;   /* light green tint */
+  --gold:      #f0a202;   /* accent — used sparingly */
+  --ink:       #12211c;   /* body text */
+  --muted:     #6b7a74;   /* secondary text */
+  --line:      #dfe5e2;   /* borders */
+  --surface:   #f4f7f5;   /* alternating section background */
+  --white:     #ffffff;
+
+  /* Type */
+  --font-head: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Spacing & shape */
+  --radius:    10px;
+  --radius-lg: 16px;
+  --shadow:    0 4px 16px rgba(13, 59, 46, 0.08);
+}
+
+
+/* ==========================================================================
+   2. BASE ELEMENTS
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--white);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-head);
+  line-height: 1.2;
+  color: var(--green-900);
+}
+
+h1 { font-size: 2.75rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.125rem; }
+h4 { font-size: 1rem; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* Keyboard users must always see where they are */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--green-700);
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   3. REUSABLE PIECES
+   ========================================================================== */
+
+/* Centres content and keeps it off the screen edges */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.muted { color: var(--muted); }
+.small { font-size: 0.875rem; }
+
+.link {
+  color: var(--green-700);
+  font-weight: 500;
+  border-bottom: 1px solid var(--green-700);
+  padding-bottom: 2px;
+}
+
+/* ----- Buttons ----- */
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--green-700);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background-color: var(--green-900);
+}
+
+.btn-outline {
+  border-color: var(--line);
+  color: var(--green-900);
+  background-color: var(--white);
+}
+.btn-outline:hover {
+  border-color: var(--green-700);
+  color: var(--green-700);
+}
+
+.btn-ghost {
+  color: var(--green-900);
+  background-color: transparent;
+}
+.btn-ghost:hover {
+  background-color: var(--green-100);
+}
+
+.btn-accent {
+  background-color: var(--gold);
+  color: var(--green-900);
+  font-weight: 600;
+}
+.btn-accent:hover {
+  background-color: #d89100;
+}
+
+.btn-sm    { padding: 7px 14px; font-size: 0.85rem; }
+.btn-block { display: block; width: 100%; }
+
+/* ----- Badge ----- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background-color: var(--gold);
+  color: var(--green-900);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-light {
+  background-color: var(--white);
+  color: var(--green-900);
+}
+
+/* ----- Progress bar (reused on my-courses.html later) ----- */
+.progress {
+  height: 6px;
+  border-radius: 99px;
+  background-color: var(--line);
+  overflow: hidden;
+  margin: 14px 0 6px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--green-700);
+}
+
+/* ----- Section wrappers ----- */
+.section {
+  padding: 72px 0;
+}
+
+.section-alt {
+  background-color: var(--surface);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.section-title {
+  margin-bottom: 32px;
+}
+
+
+/* ==========================================================================
+   4. NAVBAR
+   ========================================================================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 68px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background-color: var(--green-700);
+  color: var(--white);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.logo-text {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--green-900);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+}
+
+.nav-links a {
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 4px 0;
+}
+
+.nav-links a:hover {
+  color: var(--green-900);
+}
+
+/* Marks the page you are currently on */
+.nav-links a.active {
+  color: var(--green-900);
+  font-weight: 500;
+  border-bottom: 2px solid var(--green-700);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cart-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--green-900);
+  padding: 8px 10px;
+}
+
+.cart-count {
+  display: grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Hamburger — hidden on desktop, shown in the responsive section */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  border: none;
+  background: none;
+}
+
+.menu-toggle span {
+  width: 20px;
+  height: 2px;
+  background-color: var(--green-900);
+}
+
+
+/* ==========================================================================
+   5. FOOTER
+   ========================================================================== */
+
+.footer {
+  background-color: var(--green-900);
+  color: #cfdcd6;
+  padding-top: 56px;
+}
+
+.footer h4,
+.footer .logo-text {
+  color: var(--white);
+}
+
+.footer .muted {
+  color: #9db3aa;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  padding-bottom: 40px;
+}
+
+.footer-brand p {
+  margin-top: 12px;
+  max-width: 260px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col h4 {
+  margin-bottom: 4px;
+}
+
+.footer-col a {
+  font-size: 0.9rem;
+  color: #cfdcd6;
+}
+
+.footer-col a:hover {
+  color: var(--white);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+
+
+/* ==========================================================================
+   6. HOME PAGE
+   ========================================================================== */
+
+/* ----- Hero ----- */
+.hero {
+  background-color: var(--surface);
+  padding: 80px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-tagline {
+  color: var(--green-700);
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 14px;
+}
+
+.hero-sub {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin-top: 16px;
+}
+
+.hero-search {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+  max-width: 480px;
+}
+
+.hero-search input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+}
+
+.hero-search input::placeholder {
+  color: var(--muted);
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 36px;
+}
+
+.stat strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  color: var(--green-900);
+}
+
+.stat span {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* The live-class card sitting next to the headline */
+.hero-card {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.hero-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.hero-card-time {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.hero-card h3 {
+  margin-bottom: 4px;
+}
+
+.hero-card .btn {
+  margin-top: 16px;
+}
+
+/* ----- Categories ----- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.category-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  transition: border-color 0.15s ease;
+}
+
+.category-card:hover {
+  border-color: var(--green-700);
+}
+
+.category-card p {
+  margin-top: 4px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ----- Course cards (reused on courses.html later) ----- */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.course-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.course-thumb {
+  position: relative;
+  height: 130px;
+  padding: 12px;
+  background-color: var(--green-700);
+}
+
+/* Placeholder colours until you add real images */
+.thumb-1 { background-color: #14614a; }
+.thumb-2 { background-color: #1f4d63; }
+.thumb-3 { background-color: #5a4a7d; }
+.thumb-4 { background-color: #8a5a2b; }
+
+.course-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px;
+}
+
+.course-category {
+  font-size: 0.78rem;
+  color: var(--green-700);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.course-card h3 {
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.rating {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+.course-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.price {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+/* ----- How it works (a real sequence, so numbers are appropriate) ----- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.step {
+  padding-top: 20px;
+  border-top: 2px solid var(--green-100);
+}
+
+.step-number {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-family: var(--font-head);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.step h3 {
+  margin-bottom: 6px;
+}
+
+.step p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ----- Call to action band ----- */
+.cta-band {
+  background-color: var(--green-900);
+  color: var(--white);
+  padding: 56px 0;
+}
+
+.cta-band h2 {
+  color: var(--white);
+}
+
+.cta-band p {
+  color: #9db3aa;
+  margin-top: 8px;
+}
+
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+
+/* Tablet */
+@media (max-width: 900px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .section { padding: 48px 0; }
+  .hero    { padding: 48px 0; }
+
+  .menu-toggle { display: flex; }
+
+  /* Menu is hidden until JS adds the .open class */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 20px 16px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links a.active {
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Save space: hide the text buttons, keep cart + hamburger */
+  .nav-actions .btn {
+    display: none;
+  }
+
+  .hero-search {
+    flex-direction: column;
+  }
+
+  .hero-stats {
+    gap: 24px;
+  }
+
+  .course-grid,
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Respect the user's motion setting */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+}
+/* ==========================================================================
+   7. FORMS  (shared by every page that has inputs)
+   ========================================================================== */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* Two fields side by side */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--green-900);
+}
+
+/* A label with a link on the right, e.g. "Password ... Forgot?" */
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  color: var(--ink);
+}
+
+.form-input::placeholder {
+  color: #9aa8a2;
+}
+
+.form-input:focus {
+  border-color: var(--green-700);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--green-100);
+}
+
+.form-input[readonly] {
+  background-color: var(--surface);
+  color: var(--muted);
+}
+
+/* JS adds this class when a field fails validation */
+.form-input.invalid {
+  border-color: var(--danger);
+}
+
+.form-input.invalid:focus {
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+/* Error text under a field — empty means invisible */
+.form-error {
+  min-height: 18px;
+  margin-top: 5px;
+  font-size: 0.82rem;
+  color: var(--danger);
+}
+
+.form-hint {
+  margin-top: 5px;
+}
+
+/* ----- Dropdowns ----- */
+.form-select {
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.form-select-block {
+  width: 100%;
+  padding: 11px 13px;
+  font-size: 1rem;
+}
+
+.form-select:focus {
+  border-color: var(--green-700);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--green-100);
+}
+
+/* ----- Show / hide password ----- */
+.input-with-button {
+  position: relative;
+}
+
+.input-with-button .form-input {
+  padding-right: 62px;
+}
+
+.reveal-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 9px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* ----- Radio buttons shown as boxes ----- */
+.role-options {
+  display: flex;
+  gap: 10px;
+}
+
+.role-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+
+.role-option input {
+  accent-color: var(--green-700);
+}
+
+/* :has() lets the whole box react when the radio inside it is picked */
+.role-option:has(input:checked) {
+  border-color: var(--green-700);
+  background-color: var(--green-100);
+}
+
+/* ----- Checkbox with text beside it ----- */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.checkbox-row input {
+  margin-top: 3px;
+  accent-color: var(--green-700);
+}
+
+/* ----- A bordered box that groups one part of a form ----- */
+.form-card {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  margin-bottom: 20px;
+}
+
+.form-card-title {
+  font-size: 1.15rem;
+  margin-bottom: 18px;
+}
+
+/* Extra fields revealed by a checkbox */
+.reveal-block {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+/* ----- Buttons at the end of a form ----- */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.form-actions-left {
+  justify-content: flex-start;
+}
+
+/* ----- Message box above a form ----- */
+.alert {
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  font-size: 0.9rem;
+}
+
+.alert-error {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+}
+
+.alert-success {
+  background-color: var(--success-soft);
+  color: var(--success);
+}
+
+/* ----- Extra button styles ----- */
+.btn-danger {
+  background-color: var(--danger);
+  color: var(--white);
+}
+
+.btn-danger:hover {
+  background-color: #8f1e18;
+}
+
+/* Outline button sitting on a dark background */
+.btn-on-dark {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+}
+
+.btn-on-dark:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.btn-block + .btn-block {
+  margin-top: 10px;
+}
+
+
+/* ==========================================================================
+   8. AUTH PAGES  (register.html, login.html)
+   ========================================================================== */
+
+.auth {
+  background-color: var(--surface);
+  padding: 56px 0;
+}
+
+.auth-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Login has fewer fields, so its card is narrower */
+.auth-inner-narrow {
+  grid-template-columns: 0.95fr 1.05fr;
+}
+
+.auth-card {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 36px;
+}
+
+.auth-title {
+  font-size: 1.9rem;
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* A horizontal rule with the word "or" sitting in the middle */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--line);
+}
+
+/* ----- Right-hand panel ----- */
+.auth-side {
+  padding: 30px 4px;
+}
+
+.auth-side h2 {
+  font-size: 1.4rem;
+  margin-bottom: 18px;
+}
+
+.auth-quote {
+  margin-top: 30px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--gold);
+  background-color: var(--white);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.auth-quote p:first-child {
+  font-family: var(--font-head);
+  font-size: 1.02rem;
+  color: var(--green-900);
+  margin-bottom: 6px;
+}
+
+/* ----- Tick list, reused on several pages ----- */
+.tick-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tick-list li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* The tick is decoration, so it is drawn in CSS not written in HTML */
+.tick-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.tick-list-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+}
+
+
+/* ==========================================================================
+   9. SHARED PAGE PIECES
+   (page header, breadcrumb, empty states, tabs, accordion, avatar)
+   ========================================================================== */
+
+.page-header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line);
+  padding: 40px 0 44px;
+}
+
+.page-header h1 {
+  font-size: 2.3rem;
+  max-width: 22ch;
+}
+
+.page-sub {
+  color: var(--muted);
+  margin-top: 12px;
+  max-width: 60ch;
+}
+
+.page-sub-wide {
+  max-width: 72ch;
+  font-size: 1.05rem;
+}
+
+/* ----- Breadcrumb trail ----- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.breadcrumb a:hover {
+  color: var(--green-700);
+}
+
+.breadcrumb-light {
+  color: #9db3aa;
+}
+
+.breadcrumb-light a:hover {
+  color: var(--white);
+}
+
+/* ----- "Nothing here" blocks ----- */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  max-width: 42ch;
+  margin: 0 auto 18px;
+}
+
+.empty-state-lg {
+  padding: 64px 24px;
+}
+
+.gate-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ----- Tabs (course details, my courses) ----- */
+.tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 11px 16px;
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--green-900);
+}
+
+.tab.active {
+  color: var(--green-900);
+  font-weight: 500;
+  border-bottom-color: var(--green-700);
+}
+
+.tab-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 6px;
+  border-radius: 99px;
+  background-color: var(--surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tab.active .tab-count {
+  background-color: var(--green-100);
+  color: var(--green-700);
+}
+
+/* Panels are hidden until JS marks one active */
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ----- Panel headings inside tabs ----- */
+.panel-title {
+  font-size: 1.25rem;
+  margin-bottom: 14px;
+}
+
+.panel-title:not(:first-child) {
+  margin-top: 32px;
+}
+
+.panel-text {
+  color: var(--muted);
+  margin-bottom: 14px;
+  max-width: 68ch;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.panel-head .panel-title {
+  margin: 0;
+}
+
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.bullet-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--green-700);
+}
+
+/* ----- Accordion (syllabus + FAQ) ----- */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.accordion-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+.accordion-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 15px 18px;
+  border: none;
+  background: none;
+  text-align: left;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+.accordion-head:hover {
+  background-color: var(--surface);
+}
+
+.accordion-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Body is closed until JS adds .open to the item */
+.accordion-body {
+  display: none;
+  padding: 0 18px 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.accordion-item.open .accordion-body {
+  display: block;
+}
+
+.accordion-item.open .accordion-icon {
+  background-color: var(--green-700);
+  color: var(--white);
+}
+
+/* ----- Round initials, used for people ----- */
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.avatar-lg {
+  width: 68px;
+  height: 68px;
+  font-size: 1.4rem;
+}
+
+.side-title {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+
+/* ----- Warning strip ----- */
+.notice-bar {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  background-color: #fff6e0;
+  border: 1px solid #f2d99a;
+  color: #7a5200;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+
+/* ==========================================================================
+   10. COURSES PAGE  (courses.html)
+   ========================================================================== */
+
+.courses-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* ----- Filter sidebar ----- */
+.filter-panel {
+  position: sticky;
+  top: 88px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+}
+
+.filter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+
+.filter-heading {
+  font-size: 1.05rem;
+}
+
+.filter-group + .filter-group {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.filter-title {
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.filter-check input {
+  accent-color: var(--green-700);
+}
+
+.filter-check:hover {
+  color: var(--green-900);
+}
+
+/* ----- Search and sort bar ----- */
+.courses-main {
+  min-width: 0;   /* stops long titles pushing the grid wider */
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 220px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* The Filters button only appears on small screens */
+.filter-toggle {
+  display: none;
+}
+
+.results-count {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Grid variants used on different pages */
+.course-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.course-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* ==========================================================================
+   11. COURSE DETAILS  (course-details.html)
+   ========================================================================== */
+
+.course-hero {
+  background-color: var(--green-900);
+  color: #cfdcd6;
+  padding: 44px 0 40px;
+}
+
+.course-hero h1 {
+  color: var(--white);
+  font-size: 2.2rem;
+  max-width: 20ch;
+}
+
+.course-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 40px;
+  align-items: start;
+}
+
+.course-hero-category {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.course-hero-sub {
+  margin-top: 14px;
+  max-width: 56ch;
+  color: #9db3aa;
+}
+
+.course-hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: #9db3aa;
+}
+
+.course-hero-meta .rating {
+  color: var(--gold);
+}
+
+.course-hero-author {
+  margin-top: 12px;
+  font-size: 0.92rem;
+}
+
+.course-hero-author strong {
+  color: var(--white);
+}
+
+/* ----- Purchase card ----- */
+.buy-card {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.buy-thumb {
+  height: 160px;
+  background-color: var(--green-700);
+}
+
+.buy-body {
+  padding: 20px;
+}
+
+.buy-price {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--green-900);
+  margin-bottom: 16px;
+}
+
+.buy-note {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.buy-facts {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buy-facts li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.buy-facts strong {
+  color: var(--green-900);
+  font-weight: 500;
+}
+
+/* ----- Two-column body ----- */
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: start;
+}
+
+.detail-main {
+  min-width: 0;
+}
+
+.detail-side {
+  position: sticky;
+  top: 88px;
+}
+
+/* ----- Instructor ----- */
+.instructor-card {
+  display: flex;
+  gap: 18px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+}
+
+.instructor-info h3 {
+  margin-bottom: 2px;
+}
+
+.instructor-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 12px 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ----- Reviews ----- */
+.review-form {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+  margin-bottom: 26px;
+}
+
+.review-form h3 {
+  margin-bottom: 16px;
+}
+
+.star-picker {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--line);
+  padding: 2px;
+  transition: color 0.1s ease;
+}
+
+/* JS adds .filled to the stars up to the one you clicked */
+.star.filled {
+  color: var(--gold);
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-item {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+}
+
+.review-item-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.review-item-name {
+  font-weight: 500;
+  color: var(--green-900);
+}
+
+.review-stars {
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+
+/* ----- Related courses in the sidebar ----- */
+.related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.related-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  transition: border-color 0.15s ease;
+}
+
+.related-item:hover {
+  border-color: var(--green-700);
+}
+
+.related-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background-color: var(--green-700);
+  flex-shrink: 0;
+}
+
+.related-title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--green-900);
+  margin-bottom: 4px;
+}
+
+
+/* ==========================================================================
+   12. CART, CHECKOUT, PAYMENT, SUCCESS
+   ========================================================================== */
+
+/* Shared two-column layout: items on the left, summary on the right */
+.cart-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+}
+
+.cart-main {
+  min-width: 0;
+}
+
+.cart-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  align-items: center;
+}
+
+.cart-item-thumb {
+  height: 74px;
+  border-radius: 8px;
+  background-color: var(--green-700);
+}
+
+.cart-item-title {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.cart-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.cart-item-side {
+  text-align: right;
+}
+
+.cart-item-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  align-items: flex-end;
+}
+
+.remove-btn {
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  color: var(--danger);
+  padding: 2px 0;
+}
+
+.remove-btn:hover {
+  text-decoration: underline;
+}
+
+/* ----- Price summary card ----- */
+.summary-card {
+  position: sticky;
+  top: 88px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.summary-title {
+  font-size: 1.15rem;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.88rem;
+}
+
+.summary-item span:first-child {
+  color: var(--muted);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.summary-row-discount {
+  color: var(--success);
+}
+
+.summary-total {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+  margin-bottom: 18px;
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+.summary-note {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.summary-billing {
+  margin: 16px 0;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ----- Coupon ----- */
+.coupon-box {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+
+.coupon-row {
+  display: flex;
+  gap: 8px;
+}
+
+.coupon-row .form-input {
+  flex: 1;
+}
+
+.coupon-success {
+  font-size: 0.85rem;
+  color: var(--success);
+  margin-top: 6px;
+}
+
+/* ----- Three-step tracker ----- */
+.checkout-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.checkout-step {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px 8px 8px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  background-color: var(--white);
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.checkout-step-number {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--surface);
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.checkout-step.done {
+  border-color: var(--green-100);
+  color: var(--green-700);
+}
+
+.checkout-step.done .checkout-step-number {
+  background-color: var(--green-100);
+  color: var(--green-700);
+}
+
+.checkout-step.current {
+  border-color: var(--green-700);
+  background-color: var(--green-700);
+  color: var(--white);
+}
+
+.checkout-step.current .checkout-step-number {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: var(--white);
+}
+
+/* ----- Payment method picker ----- */
+.method-list {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.method-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 170px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  cursor: pointer;
+}
+
+.method-option input {
+  accent-color: var(--green-700);
+}
+
+.method-option:has(input:checked) {
+  border-color: var(--green-700);
+  background-color: var(--green-100);
+}
+
+.method-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.method-info strong {
+  font-size: 0.95rem;
+  color: var(--green-900);
+}
+
+/* Only the chosen method's panel is shown */
+.method-panel {
+  display: none;
+}
+
+.method-panel.active {
+  display: block;
+}
+
+/* ----- Processing overlay ----- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background-color: rgba(13, 59, 46, 0.55);
+}
+
+.overlay-box {
+  text-align: center;
+  padding: 36px 40px;
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  max-width: 340px;
+}
+
+.overlay-box h3 {
+  margin-bottom: 6px;
+}
+
+.spinner {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 18px;
+  border: 3px solid var(--green-100);
+  border-top-color: var(--green-700);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ----- Success page ----- */
+.success-banner {
+  background-color: var(--green-900);
+  color: #cfdcd6;
+  padding: 56px 0;
+  text-align: center;
+}
+
+.success-banner h1 {
+  color: var(--white);
+  font-size: 2.2rem;
+}
+
+.success-banner-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.success-tick {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: var(--gold);
+  color: var(--green-900);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.success-sub {
+  margin-top: 10px;
+  color: #9db3aa;
+  max-width: 46ch;
+}
+
+.success-sub strong {
+  color: var(--white);
+}
+
+.success-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+/* ----- Receipt ----- */
+.receipt-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.receipt-head .form-card-title {
+  margin-bottom: 2px;
+}
+
+.receipt-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 24px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  margin-bottom: 24px;
+}
+
+.receipt-fact dt {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+
+.receipt-fact dd {
+  font-weight: 500;
+  color: var(--green-900);
+}
+
+.receipt-subtitle {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.receipt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.receipt-item-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--green-900);
+}
+
+.receipt-totals {
+  max-width: 320px;
+  margin-left: auto;
+}
+
+/* Stacked version of the numbered steps */
+.steps-stacked {
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.help-list {
+  margin: 16px 0 20px;
+}
+
+
+/* ==========================================================================
+   13. MY LEARNING  (my-courses.html)
+   ========================================================================== */
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.stat-box {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+}
+
+.stat-box strong {
+  display: block;
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  color: var(--green-900);
+  line-height: 1.1;
+}
+
+.stat-box span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ----- Resume banner ----- */
+.continue-card {
+  display: grid;
+  grid-template-columns: 170px 1fr auto;
+  gap: 22px;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.continue-thumb {
+  height: 104px;
+  border-radius: var(--radius);
+  background-color: var(--green-700);
+}
+
+.continue-body h3 {
+  margin-bottom: 4px;
+}
+
+/* ----- Enrolled course cards ----- */
+.enrolled-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.enrolled-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+.enrolled-thumb {
+  height: 120px;
+  background-color: var(--green-700);
+}
+
+.enrolled-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 16px;
+}
+
+.enrolled-body h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.enrolled-footer {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+/* Small label showing course state */
+.status-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  margin-bottom: 8px;
+}
+
+.status-tag.completed {
+  background-color: var(--success-soft);
+  color: var(--success);
+}
+
+
+/* ==========================================================================
+   14. PROFILE  (profile.html)
+   ========================================================================== */
+
+.profile-layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.profile-side {
+  position: sticky;
+  top: 88px;
+}
+
+.profile-card {
+  text-align: center;
+  padding: 26px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  margin-bottom: 16px;
+}
+
+.profile-card .avatar {
+  margin: 0 auto 14px;
+}
+
+.profile-name {
+  font-size: 1.15rem;
+  margin-bottom: 2px;
+}
+
+.role-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 12px;
+  border-radius: 99px;
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.profile-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+
+.profile-fact {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+}
+
+.profile-fact dt {
+  color: var(--muted);
+}
+
+.profile-fact dd {
+  font-weight: 500;
+  color: var(--green-900);
+}
+
+/* ----- Side menu ----- */
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.profile-menu-item {
+  padding: 11px 14px;
+  border: none;
+  border-radius: var(--radius);
+  background: none;
+  text-align: left;
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+.profile-menu-item:hover {
+  background-color: var(--surface);
+  color: var(--green-900);
+}
+
+.profile-menu-item.active {
+  background-color: var(--green-100);
+  color: var(--green-700);
+  font-weight: 500;
+}
+
+.profile-menu-item.danger {
+  color: var(--danger);
+}
+
+.profile-menu-item.danger:hover {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* Only one panel shows at a time */
+.profile-panel {
+  display: none;
+}
+
+.profile-panel.active {
+  display: block;
+}
+
+.danger-card {
+  border-color: #f0c4c0;
+}
+
+/* ----- Order history rows ----- */
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.order-row-id {
+  font-weight: 500;
+  color: var(--green-900);
+  margin-bottom: 3px;
+}
+
+/* ----- Preference toggles ----- */
+.toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+
+.toggle-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-text strong {
+  font-size: 0.95rem;
+  color: var(--green-900);
+}
+
+.toggle-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green-700);
+  flex-shrink: 0;
+}
+
+
+/* ==========================================================================
+   15. ABOUT PAGE  (about.html)
+   ========================================================================== */
+
+.prose-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 44px;
+  align-items: start;
+}
+
+.prose-main .panel-text {
+  font-size: 1.02rem;
+}
+
+.prose-side {
+  position: sticky;
+  top: 88px;
+}
+
+.fact-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface);
+}
+
+.fact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fact-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+.fact-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.fact-row dt {
+  color: var(--muted);
+}
+
+.fact-row dd {
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+/* ----- Team ----- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.team-card {
+  padding: 24px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  text-align: center;
+}
+
+.team-card .avatar {
+  margin: 0 auto 14px;
+}
+
+.team-card h3 {
+  margin-bottom: 2px;
+}
+
+.team-role {
+  font-size: 0.85rem;
+  color: var(--green-700);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* ----- Quotes ----- */
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  border-top: 3px solid var(--gold);
+}
+
+.quote-card blockquote {
+  font-family: var(--font-head);
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--green-900);
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.quote-card figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.quote-card figcaption strong {
+  font-size: 0.92rem;
+  color: var(--green-900);
+}
+
+
+/* ==========================================================================
+   16. CONTACT PAGE  (contact.html)
+   ========================================================================== */
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 32px;
+  align-items: start;
+}
+
+.contact-main {
+  min-width: 0;
+}
+
+.contact-main .form-card {
+  margin-bottom: 0;
+}
+
+.contact-card {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--white);
+  margin-bottom: 16px;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.92rem;
+}
+
+.contact-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.contact-item a {
+  color: var(--green-700);
+  font-weight: 500;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-address {
+  font-style: normal;
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ----- Map ----- */
+.map-embed {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  line-height: 0;
+}
+
+.map-embed iframe {
+  width: 100%;
+  height: 220px;
+  border: 0;
+}
+
+/* FAQ sits in a narrower column so lines stay readable */
+.faq-container {
+  max-width: 760px;
+}
+
+
+/* ==========================================================================
+   17. NOT FOUND  (404.html)
+   ========================================================================== */
+
+.notfound {
+  padding: 80px 0;
+  background-color: var(--surface);
+}
+
+.notfound-inner {
+  max-width: 560px;
+  text-align: center;
+}
+
+.container.notfound-inner {
+  margin: 0 auto;
+}
+
+.notfound-code {
+  font-family: var(--font-head);
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--green-100);
+  margin-bottom: 8px;
+}
+
+.notfound-sub {
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* Centres the search box inherited from the home page */
+.notfound-search {
+  margin: 28px auto 0;
+}
+
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.notfound-links {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.link-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 24px;
+}
+
+.link-list a {
+  color: var(--green-700);
+  font-size: 0.95rem;
+}
+
+.link-list a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   18. RESPONSIVE
+   ========================================================================== */
+
+/* ----- Tablet ----- */
+@media (max-width: 900px) {
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.6rem; }
+
+  .page-header h1 { font-size: 1.9rem; }
+
+  /* Home */
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .course-grid,
+  .course-grid-3,
+  .course-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Auth */
+  .auth-inner,
+  .auth-inner-narrow {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-side {
+    order: -1;
+    padding: 0;
+  }
+
+  /* Courses: filters become a drawer opened by the Filters button */
+  .courses-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-toggle {
+    display: inline-block;
+  }
+
+  .filter-panel {
+    display: none;
+    position: static;
+  }
+
+  .filter-panel.open {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  /* Course details */
+  .course-hero-inner,
+  .detail-layout,
+  .prose-layout,
+  .contact-layout,
+  .cart-layout,
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-side,
+  .prose-side,
+  .profile-side,
+  .summary-card,
+  .filter-panel {
+    position: static;
+  }
+
+  .buy-card {
+    max-width: 420px;
+  }
+
+  /* Dashboards */
+  .stat-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .enrolled-grid,
+  .team-grid,
+  .quote-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .continue-card {
+    grid-template-columns: 140px 1fr;
+  }
+
+  .continue-action {
+    grid-column: 1 / -1;
+  }
+
+  .profile-menu {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ----- Mobile ----- */
+@media (max-width: 640px) {
+  .section { padding: 48px 0; }
+  .hero    { padding: 48px 0; }
+  .notfound { padding: 56px 0; }
+
+  .menu-toggle { display: flex; }
+
+  /* Menu is hidden until JS adds the .open class */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 20px 16px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-links a.active {
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Save space: hide the text buttons, keep cart + hamburger */
+  .nav-actions .btn {
+    display: none;
+  }
+
+  .hero-search {
+    flex-direction: column;
+  }
+
+  .hero-stats {
+    gap: 24px;
+  }
+
+  .course-grid,
+  .course-grid-3,
+  .course-grid-4,
+  .category-grid,
+  .enrolled-grid,
+  .team-grid,
+  .quote-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Forms stack */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .auth-card,
+  .form-card {
+    padding: 22px 18px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  /* Cart items stack */
+  .cart-item {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item-thumb {
+    height: 130px;
+  }
+
+  .cart-item-side,
+  .cart-item-actions {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  /* Details page */
+  .course-hero h1 { font-size: 1.7rem; }
+
+  .tick-list-2col {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    gap: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+  .tab {
+    white-space: nowrap;
+    padding: 11px 12px;
+  }
+
+  /* Payment */
+  .method-list {
+    flex-direction: column;
+  }
+
+  .receipt-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .receipt-totals {
+    max-width: none;
+  }
+
+  /* Dashboards */
+  .stat-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .continue-card {
+    grid-template-columns: 1fr;
+  }
+
+  .continue-thumb {
+    height: 130px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-right {
+    justify-content: space-between;
+  }
+
+  .notfound-code {
+    font-size: 3.6rem;
+  }
+}
+
+/* Respect the user's motion setting */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto;
+  }
+}
+
+
+/* ==========================================================================
+   19. PRINT  (used by the Print button on success.html)
+   ========================================================================== */
+
+@media print {
+  .navbar,
+  .footer,
+  .success-banner,
+  .summary-card,
+  .btn,
+  .breadcrumb {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .section {
+    padding: 0;
+  }
+
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card {
+    border: none;
+    padding: 0;
+  }
+}

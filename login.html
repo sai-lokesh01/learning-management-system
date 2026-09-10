@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in — SkillNova</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body data-page="login">
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================= -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SN</span>
+        <span class="logo-text">SkillNova</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="register.html" class="btn btn-primary">Sign up</a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       LOGIN FORM
+  ============================================================= -->
+  <main class="auth">
+    <div class="container auth-inner auth-inner-narrow">
+
+      <div class="auth-card">
+        <h1 class="auth-title">Welcome back</h1>
+        <p class="auth-sub">Log in to continue where you left off.</p>
+
+        <!-- JS fills this in: wrong password, or "account created" after signup -->
+        <div class="alert" id="formAlert" hidden></div>
+
+        <form id="loginForm" novalidate>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <input type="email" id="email" class="form-input" placeholder="you@example.com" />
+            <p class="form-error" id="emailError"></p>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label class="form-label" for="password">Password</label>
+              <a href="#" class="link small" id="forgotLink">Forgot password?</a>
+            </div>
+            <div class="input-with-button">
+              <input type="password" id="password" class="form-input" placeholder="Your password" />
+              <button type="button" class="reveal-btn" id="togglePassword">Show</button>
+            </div>
+            <p class="form-error" id="passwordError"></p>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-row">
+              <input type="checkbox" id="rememberMe" />
+              <span>Keep me logged in on this device</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block">Log in</button>
+
+        </form>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <!-- Fills the form with a test account so you don't retype it -->
+        <button type="button" class="btn btn-outline btn-block" id="demoLoginBtn">
+          Use a demo account
+        </button>
+
+        <p class="auth-switch">
+          New to SkillNova?
+          <a href="register.html" class="link">Create an account</a>
+        </p>
+      </div>
+
+      <aside class="auth-side">
+        <h2>Pick up where you stopped</h2>
+        <ul class="tick-list">
+          <li>Your enrolled courses and progress</li>
+          <li>Saved notes and bookmarked lessons</li>
+          <li>Assignment deadlines and feedback</li>
+          <li>Your cart, exactly as you left it</li>
+        </ul>
+
+        <div class="auth-quote">
+          <p>"The recordings saved me. I watch classes again before every test."</p>
+          <p class="muted small">Vikram T. · Data Science batch</p>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-mark">SN</span>
+          <span class="logo-text">SkillNova</span>
+        </a>
+        <p class="muted small">Practical courses for students and working professionals.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="courses.html">All courses</a>
+        <a href="courses.html">Categories</a>
+        <a href="my-courses.html">My learning</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About us</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="login.html">Log in</a>
+        <a href="register.html">Sign up</a>
+        <a href="cart.html">Cart</a>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="muted small">© <span id="year">2026</span> SkillNova. Built as a learning project.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
